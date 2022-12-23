@@ -1,24 +1,15 @@
 const express = require('express');
-const Posts = require("../schemas/post");
+const Posts = require("../schemas/post.js");
 const router = express.Router();
 
-router.get("/posts", async (req, res) => {
-    const posts = await Posts.find();
-    
-	res.json({ posts });
-});
+router.get('/posts', async (req, res) => {
+  const posts = await Posts.find({}, {title:1, user:1})
+  res.status(200).json({data : posts})
+})
 
-
-// let detail = null;
-// for (const good of goods) {
-//     if (Number(goodsId) === good.goodsId) {
-//         detail = good;
-//     }
-// // }
-
-// router.get("/posts/:goodsId", (req, res) => {
-// 	const { goodsId } = req.params;
-// 	const [detail] = posts.filter((posts) => posts.goodsId === Number(goodsId));
+// router.get("/posts/:_Id", (req, res) => {
+// 	const { _Id } = req.params;
+// 	const [detail] = Posts.filter((Posts) => Posts._Id === Number(_Id));
 // 	res.json({ detail });
 // });
 
